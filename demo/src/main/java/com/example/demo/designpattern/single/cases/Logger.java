@@ -1,4 +1,4 @@
-package com.example.demo.designPattern.singleton.cases;
+package com.example.demo.designpattern.single.cases;
 
 import java.io.File;
 import java.io.FileWriter;

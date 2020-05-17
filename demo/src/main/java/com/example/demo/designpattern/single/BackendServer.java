@@ -1,4 +1,4 @@
-package com.example.demo.designPattern.singleton;
+package com.example.demo.designpattern.single;
 
 import java.util.HashMap;
 import java.util.Map;

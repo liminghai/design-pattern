@@ -1,4 +1,4 @@
-package com.example.demo.designPattern.singleton.impl;
+package com.example.demo.designpattern.single.impl;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -17,7 +17,8 @@ public class IdGenerator4 {
     }
 
     private static class SingletonHolder{
-        private static final IdGenerator4 instance = new IdGenerator4();
+        private static final IdGenerator4
+            instance = new IdGenerator4();
     }
 
     public long getId(){
