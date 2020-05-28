@@ -8,19 +8,26 @@ import com.example.demo.designpattern.factory.config.RuleConfig;
 import com.example.demo.designpattern.factory.config.XmlRuleConfigParser;
 import com.example.demo.designpattern.factory.config.YamlRuleConfigParser;
 import com.example.demo.designpattern.factory.demo1.SimpleFactory;
+import com.example.demo.designpattern.factory.demo3.IRuleConfigParserFactory;
+import com.example.demo.designpattern.factory.demo3.RuleConfigParserFactoryMap;
 
 /**
- * 3. 为了让代码逻辑更加清晰，可读性更好，我们要善于将功能独立的代码块封装成函数。
- * 按照这个思路，我们可以将代码中涉及parser创建的部分逻辑抽离出来，抽象成createParser()函数。
+ * 4. 我们可以为工厂类再创建一个简单工厂，也就是工厂的工厂，用来创建工厂类对象
+ *
  */
-public class RuleConfigSource3 {
+public class RuleConfigSource4 {
 
     public RuleConfig load(String ruleConfigFilePath) {
 
         String ruleConfigFileExtension = getFileExtension(ruleConfigFilePath);
 
         // FIXME 进一步将createParser()函数剥离到一个独立的简单工厂中
-        IRuleConfigParser parser = SimpleFactory.createParser(ruleConfigFileExtension);
+        IRuleConfigParserFactory ruleConfigParserFactory = RuleConfigParserFactoryMap.getParserFactory(ruleConfigFileExtension);
+        if (ruleConfigParserFactory == null){
+            throw new InvalidRuleConfigException("Rule config file format is not supported: " + ruleConfigFilePath);
+        }
+
+        IRuleConfigParser parser = ruleConfigParserFactory.createParser();
 
         String configText = "";
         //从ruleConfigFilePath文件中读取配置文本到configText中
